@@ -19,6 +19,7 @@
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+							v-model="newTicket.user.name"
             />
           </div>
           <div class="mb-3">
@@ -27,6 +28,7 @@
               type="email"
               class="form-control"
               id="exampleInputPassword1"
+							v-model="newTicket.user.email"
             />
           </div>
           <div class="mb-3">
@@ -36,25 +38,26 @@
             <textarea
               class="form-control"
               id="exampleInputPassword1"
+							v-model="newTicket.body_subject"
             ></textarea>
           </div>
           <div class="mb-3">
             <label>Тип обращения:</label>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example" v-model="newTicket.subject">
 							<option selected disabled>Выберите тип обращения</option>
               <option v-for="(item, index) in typeAppealList" :value="item.value" :key="index">{{item.text}}</option>
             </select>
           </div>
           <div class="mb-3">
             <label>Приоритет:</label>
-            <select class="form-select">
+            <select class="form-select" v-model="newTicket.priority">
 							<option selected disabled>Выберите приоритет</option>
               <option v-for="(item, index) in priorityList" :value="item.value" :key="index">{{item.text}}</option>
             </select>
           </div>
           <div class="mb-3">
             <label>Статус:</label>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example" v-model="newTicket.status">
 							<option selected disabled>Выберите статус</option>
               <option v-for="(item, index) in statusList" :value="item.value" :key="index">{{item.text}}</option>
             </select>
@@ -73,6 +76,18 @@
 export default {
   data() {
     return {
+			newTicket : {
+				user: {
+					name: '',
+					email: '',
+					avatar: ''
+				},
+				body_subject: '',
+				subject: '',
+				status: null,
+				priority: null,
+				ticket_number: null,
+			},
       priorityList: [
 				{ text: 'Низкий', value: '0', selected: false },
         { text: 'Средний', value: '1', selected: false },
