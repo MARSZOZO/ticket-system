@@ -1,18 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <TicketList />
+  <CreateTicket />
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import TicketList from '@/components/TicketList.vue'
+import CreateTicket from '@/components/CreateTicket.vue'
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+  components : {
+    TicketList,
+    CreateTicket
+  },
+  mounted () {
+    ;
+  },
+  methods: {
+    
+  },
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

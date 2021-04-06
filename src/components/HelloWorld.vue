@@ -28,6 +28,9 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
   </div>
+  <div class="alert alert-primary" role="alert">
+  Простое primary оповещение - проверьте!
+</div>
 </template>
 
 <script>

@@ -1,9 +1,11 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <router-view/>
+      </div>
+    </div>
   </div>
-  <router-view/>
 </template>
 
 <style lang="scss">
@@ -11,20 +13,71 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+body {
+  background-color: #F4F4F4 !important;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+table {
+  font-size: 13px;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+img {
+  border-radius: 7px;
+  margin-right: 10px;
+}
+
+.badge {
+  font-size: .85em !important;
+}
+
+.priority-super-high{
+	color: darkred;
+}
+.priority-high{
+	color: red;
+}
+.priority-middle{
+	color: green;
+}
+.priority-low {
+	color: darkseagreen;
+}
+
+.status-new {
+  color: #a9d86e
+}
+.status-processing {
+  color: #ff6c60;
+}
+.status-postpone {
+  color: #fcb322; 
+}
+.status-close {
+  color: #bec3c7;
+}
+
+.modal-footer {
+  justify-content: flex-start !important;
+}
+
+.btn-success {
+  background-color: #78cd51 !important;
+  border-color: #78cd51 !important;
+  margin-right: 20px;
+}
+.btn-success:hover {
+  background-color: #65ad44!important;
+  border-color: #65ad44 !important;
+}
+.btn-danger {
+  background-color: #f67a6e !important;
+  border-color: #f67a6e !important;
+}
+.btn-danger:hover {
+  background-color: #f76051 !important;
+  border-color: #f76051!important;
 }
 </style>
