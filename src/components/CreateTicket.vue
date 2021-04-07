@@ -19,7 +19,7 @@
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-							v-model="newTicket.user.name"
+							v-model="data.user.name"
             />
           </div>
           <div class="mb-3">
@@ -28,7 +28,7 @@
               type="email"
               class="form-control"
               id="exampleInputPassword1"
-							v-model="newTicket.user.email"
+							v-model="data.user.email"
             />
           </div>
           <div class="mb-3">
@@ -38,33 +38,33 @@
             <textarea
               class="form-control"
               id="exampleInputPassword1"
-							v-model="newTicket.body_subject"
+							v-model="data.body_subject"
             ></textarea>
           </div>
           <div class="mb-3">
             <label>Тип обращения:</label>
-            <select class="form-select" aria-label="Default select example" v-model="newTicket.subject">
+            <select class="form-select" aria-label="Default select example" v-model="data.subject">
 							<option selected disabled>Выберите тип обращения</option>
               <option v-for="(item, index) in typeAppealList" :value="item.value" :key="index">{{item.text}}</option>
             </select>
           </div>
           <div class="mb-3">
             <label>Приоритет:</label>
-            <select class="form-select" v-model="newTicket.priority">
+            <select class="form-select" v-model="data.priority">
 							<option selected disabled>Выберите приоритет</option>
               <option v-for="(item, index) in priorityList" :value="Number(item.value)" :key="index">{{item.text}}</option>
             </select>
           </div>
           <div class="mb-3">
             <label>Статус:</label>
-            <select class="form-select" aria-label="Default select example" v-model="newTicket.status">
+            <select class="form-select" aria-label="Default select example" v-model="data.status">
 							<option selected disabled>Выберите статус</option>
               <option v-for="(item, index) in statusList" :value="Number(item.value)" :key="index">{{item.text}}</option>
             </select>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" @click="sendNewTicket">Создать</button>
+          <button type="button" class="btn btn-success" @click="sendData">Создать</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
         </div>
       </div>
@@ -76,7 +76,7 @@
 export default {
   data() {
     return {
-			newTicket : {
+			data : {
 				user: {
 					name: '',
 					email: '',
@@ -113,8 +113,14 @@ export default {
     };
   },
   methods: {
-    sendNewTicket() {
-      this.$emit('newTicket', this.newTicket)
+    sendData() {
+      this.$emit('createNewTicket', this.data)
+			
+			if(JSON.parse(localStorage.getItem('ticket')) != null){
+				console.log('пустой')
+			}
+
+			// localStorage.setItem('ticket', JSON.stringify(this.data))
     }
   },
 };

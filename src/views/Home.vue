@@ -1,9 +1,9 @@
 <template>
-  <TicketList 
-    :data=""
+  <TicketList
+    :data="newTicket" 
   />
   <CreateTicket 
-    @newTicket="createNewTicket($event)"
+    @createNewTicket="addTicket($event)"
   />
 </template>
 
@@ -18,15 +18,15 @@ export default {
   },
   data() {
     return {
-      key: value
+      newTicket: []
     }
   },
   mounted () {
     ;
   },
   methods: {
-    createNewTicket(ticket){
-      console.log()
+    addTicket(data){
+      this.newTicket.push(data)
     }
   },
 }

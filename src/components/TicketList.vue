@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(ticket, index) in dataTicket" :key="index">
+      <tr v-for="(ticket, index) in data" :key="index">
         <td>
           <span class="badge bg-danger"># {{ ticket.ticket_number }}</span>
         </td>
@@ -51,6 +51,9 @@
 
 <script>
 export default {
+	props: {
+		data: { type: Array },
+	},
   data() {
     return {
       dataTicket: [
