@@ -1,6 +1,10 @@
 <template>
-  <TicketList />
-  <CreateTicket />
+  <TicketList 
+    :data=""
+  />
+  <CreateTicket 
+    @newTicket="createNewTicket($event)"
+  />
 </template>
 
 <script>
@@ -12,11 +16,18 @@ export default {
     TicketList,
     CreateTicket
   },
+  data() {
+    return {
+      key: value
+    }
+  },
   mounted () {
     ;
   },
   methods: {
-    
+    createNewTicket(ticket){
+      console.log()
+    }
   },
 }
 </script>

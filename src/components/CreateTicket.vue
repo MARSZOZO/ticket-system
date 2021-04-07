@@ -52,19 +52,19 @@
             <label>Приоритет:</label>
             <select class="form-select" v-model="newTicket.priority">
 							<option selected disabled>Выберите приоритет</option>
-              <option v-for="(item, index) in priorityList" :value="item.value" :key="index">{{item.text}}</option>
+              <option v-for="(item, index) in priorityList" :value="Number(item.value)" :key="index">{{item.text}}</option>
             </select>
           </div>
           <div class="mb-3">
             <label>Статус:</label>
             <select class="form-select" aria-label="Default select example" v-model="newTicket.status">
 							<option selected disabled>Выберите статус</option>
-              <option v-for="(item, index) in statusList" :value="item.value" :key="index">{{item.text}}</option>
+              <option v-for="(item, index) in statusList" :value="Number(item.value)" :key="index">{{item.text}}</option>
             </select>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success">Создать</button>
+          <button type="button" class="btn btn-success" @click="sendNewTicket">Создать</button>
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
         </div>
       </div>
@@ -82,35 +82,40 @@ export default {
 					email: '',
 					avatar: ''
 				},
-				body_subject: '',
-				subject: '',
+				body_subject: null,
+				subject: null,
 				status: null,
 				priority: null,
 				ticket_number: null,
 			},
       priorityList: [
-				{ text: 'Низкий', value: '0', selected: false },
-        { text: 'Средний', value: '1', selected: false },
-        { text: 'Высокий', value: '2', selected: false },
-        { text: 'Критический', value: '3', selected: false }
+				{ text: 'Низкий', value: 0 },
+        { text: 'Средний', value: 1 },
+        { text: 'Высокий', value: 2 },
+        { text: 'Критический', value: 3 }
 			],
 			statusList: [
-				{ text: 'Новый', value: '0' },
-        { text: 'В обработке', value: '1' },
-        { text: 'Отложено', value: '2' },
-        { text: 'Закрыто', value: '3' }
+				{ text: 'Новый', value: 0 },
+        { text: 'В обработке', value: 1 },
+        { text: 'Отложено', value: 2 },
+        { text: 'Закрыто', value: 3 }
 			],
 			typeAppealList: [
-				{ text: 'Жалоба на пользователя', value: '0' },
-        { text: 'Жалоба на приложение', value: '1' },
-        { text: 'Жалоба на сайт', value: '2' },
-        { text: 'Оплата', value: '3' },
-        { text: 'Функционал', value: '4' },
-        { text: 'Авторизация', value: '5' },
-        { text: 'Модерация', value: '6' },
-        { text: 'Другое', value: '7' },
+				{ text: 'Жалоба на пользователя', value: 'Жалоба на пользователя' },
+        { text: 'Жалоба на приложение', value: 'Жалоба на приложение' },
+        { text: 'Жалоба на сайт', value: 'Жалоба на сайт' },
+        { text: 'Оплата', value: 'Оплата' },
+        { text: 'Функционал', value: 'Функционал' },
+        { text: 'Авторизация', value: 'Авторизация' },
+        { text: 'Модерация', value: 'Модерация' },
+        { text: 'Другое', value: 'Другое' },
 			]
     };
+  },
+  methods: {
+    sendNewTicket() {
+      this.$emit('newTicket', this.newTicket)
+    }
   },
 };
 </script>
