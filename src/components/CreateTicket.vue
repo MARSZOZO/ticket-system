@@ -1,9 +1,9 @@
 <template>
-  <div class="modal fade" id="newTicketModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+  <div class="modal" id="newTicketModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Новый тикет</h5>
+          <h2 class="modal-title text-secondary fw-bold">Новый тикет</h2>
           <button
             type="button"
             class="btn-close"
@@ -13,7 +13,7 @@
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Имя:</label>
+            <label for="exampleInputEmail1" class="form-label text-secondary fw-bold">Имя:</label>
             <input
               type="text"
               class="form-control"
@@ -23,7 +23,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Email:</label>
+            <label for="exampleInputPassword1" class="form-label text-secondary fw-bold">Email:</label>
             <input
               type="email"
               class="form-control"
@@ -32,7 +32,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label"
+            <label for="exampleInputPassword1" class="form-label text-secondary fw-bold"
               >Сообщение:</label
             >
             <textarea
@@ -42,30 +42,29 @@
             ></textarea>
           </div>
           <div class="mb-3">
-            <label>Тип обращения:</label>
+            <label class="form-label  text-secondary fw-bold">Тип обращения:</label>
             <select class="form-select" aria-label="Default select example" v-model="data.subject">
-							<option selected disabled>Выберите тип обращения</option>
               <option v-for="(item, index) in typeAppealList" :value="item.value" :key="index">{{item.text}}</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label>Приоритет:</label>
-            <select class="form-select" v-model="data.priority">
-							<option selected disabled>Выберите приоритет</option>
-              <option v-for="(item, index) in priorityList" :value="Number(item.value)" :key="index">{{item.text}}</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label>Статус:</label>
-            <select class="form-select" aria-label="Default select example" v-model="data.status">
-							<option selected disabled>Выберите статус</option>
-              <option v-for="(item, index) in statusList" :value="Number(item.value)" :key="index">{{item.text}}</option>
-            </select>
+          <div class="row mb-3">
+            <div class="col">
+              <label class="form-label  text-secondary fw-bold">Приоритет:</label>
+              <select class="form-select" v-model="data.priority">
+                <option v-for="(item, index) in priorityList" :value="Number(item.value)" :key="index" :selected="item.selected">{{item.text}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label  text-secondary fw-bold">Статус:</label>
+              <select class="form-select" aria-label="Default select example" v-model="data.status">
+                <option v-for="(item, index) in statusList" :value="Number(item.value)" :key="index" :selected="item.selected">{{item.text}}</option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" @click="sendData">Создать</button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+          <button type="button" class="btn btn-success me-3 px-4" @click="sendData">Создать</button>
+          <button type="button" class="btn btn-danger px-4" data-bs-dismiss="modal">Отмена</button>
         </div>
       </div>
     </div>
@@ -73,9 +72,12 @@
 </template>
 
 <script>
+import { Modal } from 'bootstrap'
+
 export default {
   data() {
     return {
+      modal: null,
 			data : {
 				user: {
 					name: '',
@@ -83,44 +85,44 @@ export default {
 					avatar: ''
 				},
 				body_subject: null,
-				subject: null,
-				status: null,
-				priority: null,
+				subject: 0,
+				status: 0,
+				priority: 0,
 				ticket_number: null,
 			},
       priorityList: [
-				{ text: 'Низкий', value: 0 },
-        { text: 'Средний', value: 1 },
-        { text: 'Высокий', value: 2 },
-        { text: 'Критический', value: 3 }
+				{ text: 'Низкий', value: 0},
+        { text: 'Средний', value: 1},
+        { text: 'Высокий', value: 2},
+        { text: 'Критический', value: 3}
 			],
 			statusList: [
-				{ text: 'Новый', value: 0 },
-        { text: 'В обработке', value: 1 },
-        { text: 'Отложено', value: 2 },
-        { text: 'Закрыто', value: 3 }
+				{ text: 'Новый', value: 0},
+        { text: 'В обработке', value: 1},
+        { text: 'Отложено', value: 2},
+        { text: 'Закрыто', value: 3}
 			],
 			typeAppealList: [
-				{ text: 'Жалоба на пользователя', value: 'Жалоба на пользователя' },
-        { text: 'Жалоба на приложение', value: 'Жалоба на приложение' },
-        { text: 'Жалоба на сайт', value: 'Жалоба на сайт' },
-        { text: 'Оплата', value: 'Оплата' },
-        { text: 'Функционал', value: 'Функционал' },
-        { text: 'Авторизация', value: 'Авторизация' },
-        { text: 'Модерация', value: 'Модерация' },
-        { text: 'Другое', value: 'Другое' },
+				{ text: 'Жалоба на пользователя', value: 0 },
+        { text: 'Жалоба на приложение', value: 1 },
+        { text: 'Жалоба на сайт', value: 2 },
+        { text: 'Оплата', value: 3 },
+        { text: 'Функционал', value: 4 },
+        { text: 'Авторизация', value: 5 },
+        { text: 'Модерация', value: 6 },
+        { text: 'Другое', value: 7 },
 			]
     };
+  },
+  mounted () {
+    this.modal = new Modal(document.getElementById('newTicketModal'));
   },
   methods: {
     sendData() {
       this.$emit('createNewTicket', this.data)
-			
-			if(JSON.parse(localStorage.getItem('ticket')) != null){
-				console.log('пустой')
-			}
+      this.modal.hide()
 
-			// localStorage.setItem('ticket', JSON.stringify(this.data))
+
     }
   },
 };

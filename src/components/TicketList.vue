@@ -51,66 +51,8 @@
 
 <script>
 export default {
-	props: {
-		data: { type: Array },
-	},
-  data() {
-    return {
-      dataTicket: [
-        {
-          user: {
-            name: "Василий Васильев",
-            email: "vasya@gmail.com",
-            avatar:
-              "https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo",
-          },
-          body_subject: "Ошибка номер один",
-          subject: "Функционал",
-          status: 0,
-          priority: 0,
-          ticket_number: 1,
-        },
-        {
-          user: {
-            name: "Марсель Султанов",
-            email: "vasya@gmail.com",
-            avatar:
-              "https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo",
-          },
-          body_subject: "Ошибка номер два",
-          subject: "Оплата",
-          status: 1,
-          priority: 1,
-          ticket_number: 2,
-        },
-        {
-          user: {
-            name: "Карина Корецкая",
-            email: "vasya@gmail.com",
-            avatar:
-              "https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo",
-          },
-          body_subject: "Ошибка номер три",
-          subject: "Жалоба на приложение",
-          status: 2,
-          priority: 2,
-          ticket_number: 3,
-        },
-        {
-          user: {
-            name: "Карина Корецкая",
-            email: "vasya@gmail.com",
-            avatar:
-              "https://lh3.googleusercontent.com/ogw/ADGmqu9mwjd_DnKM_J5VCm0fPeUuIA1p-MU6rR7Fi0wV=s192-c-mo",
-          },
-          body_subject: "Ошибка номер три",
-          subject: "Жалоба на приложение",
-          status: 3,
-          priority: 3,
-          ticket_number: 4,
-        },
-      ],
-    };
+  props: {
+    data: { type: Array }
   },
   methods: {
     handlerStatus(statusCode) {

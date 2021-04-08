@@ -21,9 +21,6 @@ export default {
       newTicket: []
     }
   },
-  mounted () {
-    ;
-  },
   methods: {
     addTicket(data){
       this.newTicket.push(data)

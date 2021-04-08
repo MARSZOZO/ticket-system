@@ -61,6 +61,7 @@ img {
 
 .modal-footer {
   justify-content: flex-start !important;
+  border-top: none !important;
 }
 
 .btn-success {
@@ -79,5 +80,9 @@ img {
 .btn-danger:hover {
   background-color: #f76051 !important;
   border-color: #f76051!important;
+}
+
+.modal-header {
+  border-bottom: none !important;
 }
 </style>
