@@ -22,7 +22,7 @@
     <tbody>
       <tr v-for="(ticket, index) in data" :key="index">
         <td>
-          <span class="badge bg-danger"># {{ ticket.ticket_number }}</span>
+          <span class="badge bg-danger"># {{ index + 1 }}</span>
         </td>
         <td>
           <img src="@/assets/avatar.jpg" alt="" width="50" height="50" />
@@ -33,7 +33,7 @@
             <ul>
               <li>
                 <span class="text-secondary">Тип обращения: </span
-                ><span class="text-info fw-bold">{{ ticket.subject }}</span>
+                ><span class="text-info fw-bold" v-html="handlerSubject(ticket.subject)"></span>
               </li>
               <li>
                 <span class="text-secondary">{{ ticket.body_subject }}</span>
@@ -43,18 +43,39 @@
         </td>
         <td v-html="handlerStatus(ticket.status)"></td>
         <td><span v-html="handlerPriority(ticket.priority)"></span></td>
-        <td></td>
+        <td>{{ticket.date}}</td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script>
+
 export default {
   props: {
     data: { type: Array }
   },
   methods: {
+		handlerSubject(subjectCode) {
+			switch (subjectCode) {
+				case 0:
+					return 'Жалоба на пользователя'
+				case 1:
+					return 'Жалоба на приложение'
+				case 2:
+					return 'Жалоба на сайт'
+				case 3:
+					return 'Оплата'
+				case 4:
+					return 'Функционал'
+				case 5:
+					return 'Авторизация'
+				case 6:
+					return 'Модерация'
+				case 7:
+					return 'Другое'
+			}
+		},
     handlerStatus(statusCode) {
       switch (statusCode) {
         case 0:

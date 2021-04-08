@@ -11,10 +11,12 @@
             aria-label="Close"
           ></button>
         </div>
+				<form @submit.prevent="sendData">
         <div class="modal-body">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label text-secondary fw-bold">Имя:</label>
             <input
+							required
               type="text"
               class="form-control"
               id="exampleInputEmail1"
@@ -25,6 +27,7 @@
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label text-secondary fw-bold">Email:</label>
             <input
+							required
               type="email"
               class="form-control"
               id="exampleInputPassword1"
@@ -36,6 +39,7 @@
               >Сообщение:</label
             >
             <textarea
+							required
               class="form-control"
               id="exampleInputPassword1"
 							v-model="data.body_subject"
@@ -63,9 +67,10 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success me-3 px-4" @click="sendData">Создать</button>
+          <input type="submit" class="btn btn-success me-3 px-4" value="Создать"/>
           <button type="button" class="btn btn-danger px-4" data-bs-dismiss="modal">Отмена</button>
         </div>
+				</form>
       </div>
     </div>
   </div>
@@ -73,10 +78,10 @@
 
 <script>
 import { Modal } from 'bootstrap'
+import moment from 'moment'
 
-export default {
-  data() {
-    return {
+function initialState (){
+  return {
       modal: null,
 			data : {
 				user: {
@@ -89,6 +94,7 @@ export default {
 				status: 0,
 				priority: 0,
 				ticket_number: null,
+				date: moment().format('MM.DD.YYYY, hh:mm'),
 			},
       priorityList: [
 				{ text: 'Низкий', value: 0},
@@ -112,17 +118,27 @@ export default {
         { text: 'Модерация', value: 6 },
         { text: 'Другое', value: 7 },
 			]
-    };
+  }
+}
+
+export default {
+  data() {
+    return initialState()
   },
+	watch: {
+		modal(newValue, oldValue) {
+			return new Modal(document.getElementById('newTicketModal'));
+		}
+	},
   mounted () {
     this.modal = new Modal(document.getElementById('newTicketModal'));
   },
+
   methods: {
     sendData() {
       this.$emit('createNewTicket', this.data)
       this.modal.hide()
-
-
+			Object.assign(this.$data, initialState())
     }
   },
 };
